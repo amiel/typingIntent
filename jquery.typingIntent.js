@@ -9,9 +9,10 @@
 
 
 ;(function($) {
-
-	$.fn.typingIntent = function(callback, immediate_callback, user_options) {
-		var timer, options = $.extend({}, default_options, user_options);
+	var ti;
+	
+	ti = $.fn.typingIntent = function(callback, immediate_callback, user_options) {
+		var timer, options = $.extend({}, ti.default_options, user_options);
             
 		var handler = function(e) {
 			var self = this;
@@ -25,7 +26,7 @@
 		return this.keyup(handler);
 	};
 	
-	$.fn.typingIntent.default_options = {
-		timout: 500
+	ti.default_options = {
+		timeout: 500
 	};
 })(jQuery);
