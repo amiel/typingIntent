@@ -1,0 +1,36 @@
+== Typing Intent jQuery plugin
+
+The typing intent plugin calls a callback after a user stops typing.
+
+It does this by handling keyup and setting a timeout that gets reset on each keyup.
+
+== Examples
+
+
+  $("#q").typingIntent(function(e) {
+    console.log("User finished typing (for the moment) in", this);
+    console.log("The original keyup event:", e);
+  });
+  
+  
+=== Ajax example
+
+  (function(){
+    var ajax_request;
+    
+    $("#q").typingIntent(function() {
+      ajax_request = $.get("/search.json", { q: this.val() }, function() {
+        // handle search results
+      });
+    }, function() {
+      // this second function is called immediately on keyup
+      // we use it to cancel the ajax request if it is still running
+      // immediately, when the user starts typing again
+      
+      if (ajax_request) ajax_request.abort();
+      
+      // this would also be the place to handle key up and down events to navigate through the search results
+    });  
+    
+  })();
+
