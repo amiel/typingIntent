@@ -30,6 +30,12 @@ It does this by handling keyup and setting a timeout that gets reset on each key
       if (ajax_request) ajax_request.abort();
       
       // this would also be the place to handle key up and down events to navigate through the search results
+      
+      if (this.val() == "") {
+        // returning false will prevent the first function from being run
+        // we don't need to send the ajax search request if there is no query
+        return false;
+      }
     });  
     
   })();
