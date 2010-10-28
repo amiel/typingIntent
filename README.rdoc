@@ -13,9 +13,11 @@ It does this by handling keyup and setting a timeout that gets reset on each key
   });
   
   
-=== Ajax example
+=== Ajax examples
 
-  (function(){
+Basic search
+
+  (function() {
     var ajax_request;
     
     $("#q").typingIntent(function() {
@@ -30,13 +32,29 @@ It does this by handling keyup and setting a timeout that gets reset on each key
       if (ajax_request) ajax_request.abort();
       
       // this would also be the place to handle key up and down events to navigate through the search results
+    });  
+    
+  })();
+
+
+Background form verification
+
+  (function() {
+    var ajax_request;
+    
+    $("#user_zipcode").typingIntent(function() {
+      ajax_request = $.get("/users/check_zipcode.json", { zipcode: this.val() }, function(zipcode_data) {
+        // show zipcode information
+      });
+    }, function() {
+      if (ajax_request) ajax_request.abort();
       
-      if (this.val() == "") {
+      if (! (/^\d{5}(-\d{4})?/).test(this.val())) {
         // returning false will prevent the first function from being run
-        // we don't need to send the ajax search request if there is no query
+        // we don't need to send the ajax request unless there is a valid zipcode to check
         return false;
       }
     });  
     
   })();
-
+  
