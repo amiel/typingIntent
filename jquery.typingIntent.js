@@ -9,12 +9,12 @@
  *
  * Examples:
  *
- *    $('input#url').typing_intent(function() {
+ *    $('input#url').typingIntent(function() {
  *      $.get('/validate_url', { url: this.value });
  *    });
  *
  *    var ajax;
- *    $('input#url').typing_intent(function() {
+ *    $('input#url').typingIntent(function() {
  *      ajax = $.get('/validate_url', { url: this.value });
  *    }, function() {
  *      ajax.abort();
@@ -25,7 +25,7 @@
 ;(function($) {
     var ti;
 
-    ti = $.fn.typing_intent = function(callback, immediate_callback, user_options) {
+    ti = $.fn.typingIntent = function(callback, immediate_callback, user_options) {
         var timer, options = $.extend({}, ti.default_options, user_options);
 
         var handler = function(e) {
